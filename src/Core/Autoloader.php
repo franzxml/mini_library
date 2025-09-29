@@ -14,7 +14,13 @@ final class Autoloader
     private static function load(string $class): void
     {
         if (! str_starts_with($class, 'App\\')) return;
-        $path = self::$basePath . '/' . str_replace('\\', '/', $class) . '.php';
-        if (is_file($path)) require $path;
+
+        // Ubah: tambahkan 'src/' di depan path
+        $relative = str_replace('App\\', 'src/', $class);
+        $path = self::$basePath . '/' . str_replace('\\', '/', $relative) . '.php';
+
+        if (is_file($path)) {
+            require $path;
+        }
     }
 }

@@ -5,17 +5,8 @@ use App\Core\{Autoloader, Router, DB, Container};
 use App\Controller\{BookController, MemberController};
 use App\Exception\AppException;
 
-// ===== Debug path sebelum require =====
-$path = realpath(__DIR__ . '/../src/Core/Autoloader.php');
-var_dump("Autoloader path:", $path, "File exists?", file_exists($path));
-if (!$path || !file_exists($path)) {
-    die("❌ File tidak ditemukan di lokasi: " . (__DIR__ . '/../src/Core/Autoloader.php'));
-}
-require $path;
-
-
 // ===== Namespace & Autoloading (SPL) =====
-require $path;
+require_once __DIR__ . '/../src/Core/Autoloader.php';
 Autoloader::register(basePath: dirname(__DIR__));
 
 // ===== Error handling global (Exception Handling) =====
